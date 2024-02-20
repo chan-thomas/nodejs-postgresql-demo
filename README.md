@@ -1,9 +1,8 @@
 ## Installation
-- rename .env-sample to .env
-- add db connection sting to the new .env file
-```bash
-npm run local
-```
+- Rename .env-sample to .env
+- Add db connection sting to the new .env file
+  
+Use the following SQL statements to create a **users** table and add a few records
 
 ```sql
 CREATE TABLE users (
@@ -15,8 +14,22 @@ CREATE TABLE users (
 
 insert into users (username, password) values ('Jack','abc123');
 insert into users (username, password) values ('Aaron','password'), ('Kate','password2');
+```
 
-update users set "password" = 'iforgot' where username = 'Aaron';
+Install the dependency for the app
+```bash
+npm install
+```
+
+Start the app
+```bash
+npm run local
+```
+
+
+Below are some SQL statements for reference:
+```sql
+update users set password = 'iforgot' where username = 'Aaron';
 delete from users where username = 'Jack';
 
 truncate users ;

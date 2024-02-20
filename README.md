@@ -6,7 +6,7 @@ npm run local
 ```
 
 ```sql
-CREATE TABLE users2 (
+CREATE TABLE users (
 	id  SERIAL PRIMARY KEY,
 	username varchar NOT NULL,
 	password varchar NOT NULL,

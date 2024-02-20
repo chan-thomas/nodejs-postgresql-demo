@@ -1,4 +1,4 @@
-const {Pool} = require('pg')
+const { Pool } = require('pg')
 
 let dbConfig = {
     connectionString: process.env.DATABASE_URL
@@ -24,21 +24,24 @@ exports.getUsers = (req, res) => {
 }
 
 //async await example
-exports.getUserById = async(req, res) => {
+exports.getUserById = async (req, res) => {
     const { id } = req.params;
     //Query config object
     const sqlConfig = {
         text: 'SELECT * from users where id = $1',
         values: [id],
     }
-    const results = await pool.query(sqlConfig);
-    if (results.rowCount == 0) {
-        res.status(200).json({}); 
-    }else {
-        for (let row of results.rows) {
-            console.log(JSON.stringify(row));
+    try {
+        const results = await pool.query(sqlConfig);
+        if (results.rowCount == 0) {
+            res.status(200).json({});
+        } else {
+            for (let row of results.rows) {
+                console.log(JSON.stringify(row));
+            }
+            res.status(200).json(results.rows);
         }
-        res.status(200).json(results.rows);
+    } catch (error) {
+        res.status(200).json({"error":"Something wrong"})
     }
-    return {'id':results.rows[0].id, 'username' : results.rows[0].username}   
 }
